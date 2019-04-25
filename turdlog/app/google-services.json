@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "407156415143",
+    "firebase_url": "https://turdlog-c8268.firebaseio.com",
+    "project_id": "turdlog-c8268",
+    "storage_bucket": "turdlog-c8268.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407156415143:android:c954308b35d8011f",
+        "android_client_info": {
+          "package_name": "com.example.turdlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407156415143-kq384ijobt5mirtvnh8p36etisotm6un.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDHkm_q2_3kuqFmzBxl_ldWkyWm6Sv8hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407156415143-kq384ijobt5mirtvnh8p36etisotm6un.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
