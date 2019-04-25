@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "407156415143-pevb15jqnn9seonjbnommvh88dkgtusl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.turdlog",
+            "certificate_hash": "da960e0f5986a27efae3e7038e94810c0f2cd61b"
+          }
+        },
+        {
           "client_id": "407156415143-kq384ijobt5mirtvnh8p36etisotm6un.apps.googleusercontent.com",
           "client_type": 3
         }
