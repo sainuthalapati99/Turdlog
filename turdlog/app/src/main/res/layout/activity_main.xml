@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:background="@color/sblue"
+    android:background="@color/orange1"
     tools:context=".MainActivity">
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center|center_horizontal"
+        android:layout_marginStart="103dp"
+        android:layout_marginEnd="108dp"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/name"
-        />
+        android:src="@drawable/name" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,19 +22,21 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:background="@color/colorPrimary"
+        android:background="@color/orange1"
+        android:gravity="center"
         >
 
         <TextView
-            android:layout_margin="10dp"
             android:id="@+id/titleSignup"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="User Sign up "
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_margin="10dp"
+            android:text="Sign up"
+            android:textAlignment="center"
+            android:textColor="@color/text"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
 
         <EditText
             android:layout_margin="10dp"
@@ -46,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Your Email Here"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text"
             android:background="@null"/>
 
         <EditText
@@ -56,16 +55,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Your Password Here"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text"
             android:background="@null"/>
 
-         <Button
-             android:layout_margin="10dp"
-             android:id="@+id/buttonRegister"
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             android:text="Register "
-             android:background="@color/white"/>
+            android:text="Register "
+            android:background="@color/white"/>
 
         <Button
             android:layout_margin="10dp"
@@ -79,11 +78,11 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
-            android:src="@drawable/turdlog_logo"
-            android:layout_marginBottom="10dp"/>
+            android:src="@drawable/turdlog_logo" />
 
     </LinearLayout>
 
-    </RelativeLayout>
+</RelativeLayout>
