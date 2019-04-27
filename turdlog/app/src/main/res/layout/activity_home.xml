@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/sblue"
+    android:id="@+id/Drawer_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange1"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/name"
-        android:textAlignment="center" />
-
     <LinearLayout
-        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:background="@color/colorPrimary"
         >
 
-        <EditText
+        <TextView
             android:layout_margin="10dp"
-            android:inputType="textEmailAddress"
             android:id="@+id/welcomeGreeting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Your Email Here"
             android:textColor="@android:color/black"
             android:background="@null"/>
         <Button
@@ -78,5 +69,12 @@
 
     </LinearLayout>
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/activity_navigation_bar_drawer"
+        android:layout_gravity="start">
 
-</RelativeLayout>
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>
