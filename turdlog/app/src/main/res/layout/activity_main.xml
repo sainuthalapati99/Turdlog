@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:text="Sign up"
+            android:text="Sign Up"
             android:textAlignment="center"
             android:textColor="@color/text"
             android:textSize="24sp"
