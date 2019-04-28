@@ -7,15 +7,17 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
@@ -30,7 +32,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setNavigationDrawer();
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
+
+        dLayout = (DrawerLayout) findViewById(R.id.Drawer_Layout); // initiate a DrawerLayout
+        //Button to open drawer
+        final ImageButton btnOpenDrawer = (ImageButton) findViewById(R.id.drawerButton);
+        btnOpenDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -45,19 +59,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         welcomeGreeting.setText("Welcome " + user.getEmail());
 
-        buttonMap = (Button) findViewById(R.id.buttonMap);
-        btnAdd = (Button) findViewById(R.id.buttonAdd);
+        //buttonMap = (Button) findViewById(R.id.buttonMap);
+        //btnAdd = (Button) findViewById(R.id.buttonAdd);
 
-        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        //buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
-        buttonLogout.setOnClickListener(this);
-        buttonMap.setOnClickListener(this);
-        btnAdd.setOnClickListener(this);
+        //buttonLogout.setOnClickListener(this);
+        //buttonMap.setOnClickListener(this);
+        //btnAdd.setOnClickListener(this);
     }
 
     //This method will set the button action for drawer menu items
     private void setNavigationDrawer() {
-        dLayout = (DrawerLayout) findViewById(R.id.Drawer_Layout); // initiate a DrawerLayout
         navView = (NavigationView) findViewById(R.id.navigation);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,6 +96,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /*
     @Override
     public void onClick(View View) {
         if (View == buttonMap) {
@@ -98,4 +112,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, AddBathroom.class));
         }
     }
+    */
 }

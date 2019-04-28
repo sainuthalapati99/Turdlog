@@ -18,6 +18,12 @@
         android:background="@color/colorPrimary"
         >
 
+        <ImageButton
+            android:id="@+id/drawerButton"
+            android:layout_width="142dp"
+            android:layout_height="128dp"
+            app:srcCompat="@drawable/drawer" />
+
         <TextView
             android:layout_margin="10dp"
             android:id="@+id/welcomeGreeting"
@@ -25,29 +31,6 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:background="@null"/>
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/buttonMap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bathrooms Around you"
-            android:background="@color/white"/>
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/buttonAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Bathrooms"
-            android:background="@color/white"/>
-
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/buttonLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="logout"
-            android:background="@color/white"/>
-
 
         <ImageView
             android:layout_width="100dp"
