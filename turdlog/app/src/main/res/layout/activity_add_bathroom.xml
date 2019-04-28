@@ -5,66 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/sblue"
+    android:background="@color/orange1"
     tools:context=".AddBathroom">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please enter Bathroom Details Belwo"
-        android:textColor="@color/black"
         android:gravity="center"
+        android:text="Please enter Bathroom Details Below"
+        android:textColor="@color/text"
         android:textStyle="bold" />
+
 
     <EditText
         android:id="@+id/brname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Bathroom Name"
-        android:gravity="center"
-        android:inputType="textPersonName" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/add_brdatedate"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            />
-
-        <Button
-            android:id="@+id/btn_addbrdate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/add_brdatedate"
-            android:layout_toEndOf="@+id/add_brdatedate"
-            android:layout_toRightOf="@+id/add_brdatedate"
-            android:text="Date Added" />
-
-    </LinearLayout>
+        android:inputType="textPersonName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:hint="Address"
+        android:hint="Rating"
         android:layout_alignParentLeft="true" />
 
     <Button
         android:id="@+id/btn_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="Save" />
 
 

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         }
-        progressDialog.setMessage("Signing to Turdlog...");
+        progressDialog.setMessage("Signing to TurdLog...");
         progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email,password)

@@ -2,6 +2,7 @@
 package com.example.turdlog;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AddBathroom extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextName;
-    private EditText editTextDate;
     private EditText editTextAddress;
 
     private FirebaseFirestore db;
@@ -29,28 +29,24 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bathroom);
+        getSupportActionBar().hide();
+
 
         db = FirebaseFirestore.getInstance();
 
         editTextName = findViewById(R.id.brname);
-        editTextDate = findViewById(R.id.add_brdatedate);
         editTextAddress = findViewById(R.id.address);
 
         findViewById(R.id.btn_save).setOnClickListener(this);
     }
 
-    private boolean validateInputs(String name, String Date, String Address) {
+    private boolean validateInputs(String name, String Address) {
         if (name.isEmpty()) {
             editTextName.setError("Name required");
             editTextName.requestFocus();
             return true;
         }
 
-        if (Date.isEmpty()) {
-            editTextDate.setError("Brand required");
-            editTextDate.requestFocus();
-            return true;
-        }
 
         if (Address.isEmpty()) {
             editTextAddress.setError("Description required");
@@ -64,17 +60,15 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         String name = editTextName.getText().toString().trim();
-        String date = editTextDate.getText().toString().trim();
-        String address = editTextAddress.getText().toString().trim();
+        String address = editTextAddress.getText().toString().trim(); //Im using address as rating right now change later
 
 
-        if (!validateInputs(name, date, address)) {
+        if (!validateInputs(name, address)) {
 
             CollectionReference dbProducts = db.collection("Bathrooms");
 
             Bathroom br = new Bathroom(
                     name,
-                    date,
                     address
             );
 
@@ -93,6 +87,12 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
                     });
 
         }
+
+        Intent intent = getIntent();
+        intent.putExtra("EXTRA_NAME", name);
+        intent.putExtra("EXTRA_RATING", address);
+        setResult(RESULT_OK, intent);
+        finish();
 
     }
 }
