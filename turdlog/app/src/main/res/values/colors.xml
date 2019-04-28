@@ -7,7 +7,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="sblue">#00bfff</color>
-    <color name="orange1">#ffa000</color>
+    <color name="orange1">#FFA000</color>
     <color name="orange2">#c67100</color>
-    <color name="text">#fafafa</color>
+    <color name="text">#FAFAFA</color>
 </resources>
