@@ -6,6 +6,7 @@
     android:id="@+id/Drawer_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="@color/orange1"
     tools:context=".MainActivity">
 
@@ -20,27 +21,17 @@
 
         <ImageButton
             android:id="@+id/drawerButton"
-            android:layout_width="142dp"
-            android:layout_height="128dp"
+            android:layout_width="106dp"
+            android:layout_height="88dp"
             app:srcCompat="@drawable/drawer" />
 
-        <TextView
-            android:layout_margin="10dp"
-            android:id="@+id/welcomeGreeting"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:background="@null"/>
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"
-            android:cropToPadding="true"
-            android:src="@drawable/turdlog_logo"
-            android:layout_marginBottom="10dp"/>
-
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            />
 
     </LinearLayout>
 
