@@ -35,6 +35,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.PlaceLikelihood;
@@ -227,6 +228,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+
+
+        // Allows user to long click on map and add a marker
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng point) {
+                MarkerOptions options = new MarkerOptions()
+                        .position(point);
+                Marker mMarker = mMap.addMarker(options);
+            }
+        });
 
     }
 
@@ -456,6 +468,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(newAct);
                         break;
                     case R.id.addBathroom:
+                        Toast.makeText(HomeActivity.this, "Long Click On Map To Add Bathrooms", Toast.LENGTH_SHORT).show();
 
                         break;
                 }
