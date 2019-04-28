@@ -83,6 +83,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
 
+    //User Edited marker
+    private Marker mMarker;
+
+
+    //Request Code for Activity Results
+    static final int EDIT_BATHROOM_DETAILS = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,7 +243,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onMapLongClick(LatLng point) {
                 MarkerOptions options = new MarkerOptions()
                         .position(point);
-                Marker mMarker = mMap.addMarker(options);
+                mMarker = mMap.addMarker(options);
+                mMarker.setSnippet("Click To Enter Details");
+            }
+        });
+
+        // Start an intent after clicking on the marker options
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(getApplicationContext(), AddBathroom.class);
+                startActivityForResult(intent, EDIT_BATHROOM_DETAILS);
+
             }
         });
 
@@ -478,5 +496,25 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
+    }
+
+    /*
+        Handles finishing activity Add Bathrooms
+        This will change the marker info to the user inputted one
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EDIT_BATHROOM_DETAILS){
+            if (resultCode == RESULT_OK){
+
+                String bathroomName = data.getStringExtra("EXTRA_NAME");
+                String bathroomRating = data.getStringExtra("EXTRA_RATING");
+                System.out.println(bathroomName);
+                System.out.println(bathroomRating);
+
+                mMarker.setTitle(bathroomName);
+                mMarker.setSnippet(bathroomRating);
+            }
+        }
     }
 }
