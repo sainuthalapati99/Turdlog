@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setNavigationDrawer();
+        getSupportActionBar().hide();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -50,6 +51,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
         buttonLogout.setOnClickListener(this);
+        buttonMap.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
     }
 
     //This method will set the button action for drawer menu items
@@ -61,8 +64,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id){
-                    case R.id.Logout:
-
+                    case R.id.Logout: //Logs out user on menu click
+                        firebaseAuth.signOut();
+                        finish();
+                        Intent newAct = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(newAct);
                         break;
                     case R.id.addBathroom:
 
@@ -82,7 +88,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (View == buttonMap) {
 
             startActivity(new Intent(this, MapsActivity.class));
-        } else if (View == buttonLogout) {
+        }
+        if (View == buttonLogout) {
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
