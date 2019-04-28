@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.places.GeoDataClient;
@@ -48,8 +48,10 @@ import com.google.android.gms.tasks.Task;
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
     private NavigationView navView;
     private DrawerLayout dLayout;
+    private Menu menu;
     private GoogleMap mMap;
     private static final String TAG = HomeActivity.class.getSimpleName();
     private CameraPosition mCameraPosition;
@@ -123,7 +125,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         // initiate a DrawerLayout
         dLayout = (DrawerLayout) findViewById(R.id.Drawer_Layout);
         //Button to open drawer
-        final ImageButton btnOpenDrawer = (ImageButton) findViewById(R.id.drawerButton);
+        final Button btnOpenDrawer = (Button) findViewById(R.id.drawerButton);
         btnOpenDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(new Intent(this, LoginActivity.class));
         }
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        user = firebaseAuth.getCurrentUser();
 
 
        // welcomeGreeting.setText("Welcome " + user.getEmail());
@@ -159,16 +161,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    /**
-     * Sets up the options menu.
-     * @param menu The options menu.
-     * @return Boolean.
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.current_place_menu, menu);
-        return true;
-    }
 
     /**
      * Handles a click on the menu option to get a place.
@@ -509,12 +501,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 String bathroomName = data.getStringExtra("EXTRA_NAME");
                 String bathroomRating = data.getStringExtra("EXTRA_RATING");
-                System.out.println(bathroomName);
-                System.out.println(bathroomRating);
 
                 mMarker.setTitle(bathroomName);
                 mMarker.setSnippet(bathroomRating);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.activity_navigation_bar_drawer, menu);
+        updateMenuTitles();
+        return true;
+    }
+
+    private void updateMenuTitles() {
+        MenuItem title = menu.findItem(R.id.menuUser);
+        title.setTitle("Welcome "+ user.getEmail());
     }
 }
