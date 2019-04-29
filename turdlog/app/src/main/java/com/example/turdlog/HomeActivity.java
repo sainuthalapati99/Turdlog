@@ -44,10 +44,15 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
+
     private FirebaseUser user;
     private NavigationView navView;
     private DrawerLayout dLayout;
@@ -144,8 +149,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         user = firebaseAuth.getCurrentUser();
 
+        db = FirebaseFirestore.getInstance();
 
-       // welcomeGreeting.setText("Welcome " + user.getEmail());
 
     }
 
@@ -216,8 +221,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        LatLng aderhold = new LatLng(33.7560837, -84.3892877);
-        mMap.addMarker(new MarkerOptions().position(aderhold).title("Aderhold Marker"));
 
         // Prompt the user for permission.
         getLocationPermission();
@@ -227,6 +230,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+
+        // Refresh map for other markers.
+        refresh();
+
+
 
 
         // Allows user to long click on map and add a marker
@@ -245,10 +253,17 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(getApplicationContext(), AddBathroom.class);
+                double lat = mMarker.getPosition().latitude;
+                double lon = mMarker.getPosition().longitude;
+                intent.putExtra("EXTRA_LAT", lat);
+                intent.putExtra("EXTRA_LON", lon);
                 startActivityForResult(intent, EDIT_BATHROOM_DETAILS);
 
             }
         });
+
+
+
 
     }
 
@@ -479,8 +494,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     case R.id.addBathroom:
                         Toast.makeText(HomeActivity.this, "Long Click On Map To Add Bathrooms", Toast.LENGTH_SHORT).show();
-
                         break;
+                    case R.id.goToHome:
+                        Intent reHome = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(reHome);
                 }
 
                 return false;
@@ -520,5 +537,23 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void updateMenuTitles() {
         MenuItem title = menu.findItem(R.id.menuUser);
         title.setTitle("Welcome "+ user.getEmail());
+    }
+
+    private void refresh(){
+
+
+        LatLng aderhold = new LatLng(33.7560837, -84.3892877);
+        mMap.addMarker(new MarkerOptions().position(aderhold).title("Aderhold Bathroom").snippet("5"));
+
+        LatLng starbucks = new LatLng(33.756663, -84.388570);
+        mMap.addMarker(new MarkerOptions().position(starbucks).title("Restroom found").snippet("4"));
+
+        LatLng nann = new LatLng(33.755875, -84.389338);
+        mMap.addMarker(new MarkerOptions().position(nann).title("Restroom found").snippet("3"));
+
+        LatLng ana = new LatLng(33.755180, -84.389276);
+        mMap.addMarker(new MarkerOptions().position(ana).title("Restroom found").snippet("2"));
+
+
     }
 }

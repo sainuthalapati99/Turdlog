@@ -22,6 +22,9 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
 
     private EditText editTextName;
     private EditText editTextAddress;
+    private double lat, lang;
+    private int rating;
+    private String name, r;
 
     private FirebaseFirestore db;
 
@@ -30,6 +33,11 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bathroom);
         getSupportActionBar().hide();
+
+        Intent intent = getIntent();
+
+        lat = intent.getDoubleExtra("EXTRA_LAT", 0.0);
+        lang = intent.getDoubleExtra("EXTRA_LON", 0.0);
 
 
         db = FirebaseFirestore.getInstance();
@@ -40,43 +48,52 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
         findViewById(R.id.btn_save).setOnClickListener(this);
     }
 
-    private boolean validateInputs(String name, String Address) {
+    private boolean validateInputs(String name, int rating) {
         if (name.isEmpty()) {
             editTextName.setError("Name required");
             editTextName.requestFocus();
             return true;
         }
 
-
-        if (Address.isEmpty()) {
-            editTextAddress.setError("Description required");
+        if (rating > 5 || rating < 0){
+            editTextAddress.setError("Number 1-5");
             editTextAddress.requestFocus();
             return true;
         }
+
         return false;
     }
 
     @Override
     public void onClick(View v) {
 
-        String name = editTextName.getText().toString().trim();
-        String address = editTextAddress.getText().toString().trim(); //Im using address as rating right now change later
+        name = editTextName.getText().toString().trim();
+        r = editTextAddress.getText().toString().trim();
+
+        rating = Integer.parseInt(r);
 
 
-        if (!validateInputs(name, address)) {
+        if (!validateInputs(name, rating)) {
 
             CollectionReference dbProducts = db.collection("Bathrooms");
 
             Bathroom br = new Bathroom(
                     name,
-                    address
+                    rating,
+                    lat,
+                    lang
             );
 
             dbProducts.add(br)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(AddBathroom.this, "Product Added", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AddBathroom.this, "Bathroom Added", Toast.LENGTH_LONG).show();
+                            Intent intent = getIntent();
+                            intent.putExtra("EXTRA_NAME", name);
+                            intent.putExtra("EXTRA_RATING", r);
+                            setResult(RESULT_OK, intent);
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -87,12 +104,5 @@ public class AddBathroom extends AppCompatActivity implements View.OnClickListen
                     });
 
         }
-
-        Intent intent = getIntent();
-        intent.putExtra("EXTRA_NAME", name);
-        intent.putExtra("EXTRA_RATING", address);
-        setResult(RESULT_OK, intent);
-        finish();
-
     }
 }
